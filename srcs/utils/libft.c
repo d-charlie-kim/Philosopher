@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 22:25:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/15 22:30:30 by dokkim           ###   ########.fr       */
+/*   Created: 2021/10/17 16:50:34 by dokkim            #+#    #+#             */
+/*   Updated: 2021/10/17 17:01:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-void	validate(int argc, char **argv)
+int	ft_strlen(char *str)
 {
-	if (argc != 5 || argc != 6)
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] && s2[i])
 	{
-		
+		if (s1[i] != s2[i])
+			break ;
+		i++;
 	}
-	
+	return (s1[i] - s2[i]);
 }
