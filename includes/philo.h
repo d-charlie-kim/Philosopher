@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:20:16 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/17 18:28:49 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:35:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,19 @@ typedef struct s_philo
 	long long	right_fork;
 	long long	left_fork;
 	long long	num_ate;
-	long long	status;
+	int			status;
 }	t_philo;
-
-
 
 typedef struct s_system
 {
-	t_info	info;
-	t_philo	philos;
-	...
+	"포크 포인터들이 담겨 있는 배열";
+	t_philo	*philos;
+	t_info	*philo_info;
 }	t_system;
+
+typedef struct s_time
+{
+	시계 관련
+}	t_time;
 
 #endif

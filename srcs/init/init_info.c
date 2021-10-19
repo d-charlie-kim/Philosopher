@@ -1,50 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   init_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 16:50:34 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/19 16:05:52 by dokkim           ###   ########.fr       */
+/*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
+/*   Updated: 2021/10/19 16:33:55 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+void	info_init(int argc, char **argv, t_info *philo_info)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			break ;
-		i++;
-	}
-	return (s1[i] - s2[i]);
-}
-
-long long	ft_atoll(char *str)
-{
-	int			i;
-	long long	num;
-
-	i = 0;
-	num = 0;
-	while (str[i])
-	{
-		num = num * 10 + str[i] - '0';
-		i++;
-	}
-	return (num);
+	philo_info->philos_num = ft_atoll(argv[1]);
+	philo_info->time_to_die = ft_atoll(argv[2]);
+	philo_info->time_to_eat = ft_atoll(argv[3]);
+	philo_info->time_to_sleep = ft_atoll(argv[4]);
+	if (argc == 6)
+		philo_info->max_eat = ft_atoll(argv[5]);
+	else
+		philo_info->max_eat = -1;
 }

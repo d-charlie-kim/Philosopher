@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:25:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/17 17:12:56 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:06:07 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,21 @@ int	check_count(int argc)
 	if (argc == 5 || argc == 6)
 		return (1);
 	else
-		return(0);
-	
+		return (0);
 }
 
 int	check_isdigit(char **argv)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
+	i = 1;
 	while (argv[i])
 	{
+		j = 0;
 		while (argv[i][j])
 		{
-			if (argv[i][j] > 9 || argv[i][j] < 0)
+			if (argv[i][j] > '9' || argv[i][j] < '0')
 				return (0);
 			j++;
 		}
@@ -51,8 +52,8 @@ int	check_isdigit(char **argv)
 
 int	check_range(char **argv)
 {
-	int i;
-	int size;
+	int	i;
+	int	size;
 
 	i = 0;
 	while (argv[i])
