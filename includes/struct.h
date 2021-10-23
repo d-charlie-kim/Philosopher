@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 21:20:16 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/20 20:52:58 by dokkim           ###   ########.fr       */
+/*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
+/*   Updated: 2021/10/24 01:32:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include "struct.h"
+# include <pthread.h>
 
 typedef struct s_info
 {
@@ -62,8 +58,8 @@ typedef struct s_system
 {
 	t_philo		*philos;
 	t_monitor	*monitors;
-	t_info		philo_info;
-	t_shared	shared;
+	t_info		*philo_info;
+	t_shared	*shared;
 	t_fork		*forks;
 }	t_system;
 
@@ -72,5 +68,6 @@ typedef struct s_time
 	long long	current_time;
 	long long	starting_time;
 }	t_time;
+
 
 #endif

@@ -10,56 +10,94 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	init_info(int argc, char **argv, t_info *philo_info)
+#include "init.h"
+#include "struct.h"
+
+void	init_info(int argc, char **argv, t_system *philo_system)
 {
-	philo_info->philos_num = ft_atoll(argv[1]);
-	philo_info->time_to_die = ft_atoll(argv[2]);
-	philo_info->time_to_eat = ft_atoll(argv[3]);
-	philo_info->time_to_sleep = ft_atoll(argv[4]);
+	t_info	*info;
+
+	philo_system->philo_info = (t_info *)malloc(sizeof(t_info));
+	if (philo_system->philo_info == NULL)
+		return ;
+	info = philo_system->philo_info;
+	info->philos_num = ft_atoll(argv[1]);
+	info->time_to_die = ft_atoll(argv[2]);
+	info->time_to_eat = ft_atoll(argv[3]);
+	info->time_to_sleep = ft_atoll(argv[4]);
 	if (argc == 6)
-		philo_info->max_eat = ft_atoll(argv[5]);
+		info->max_eat = ft_atoll(argv[5]);
 	else
-		philo_info->max_eat = -1;
+		info->max_eat = -1;
 }
 
-int	init_philos(t_system *philos_system)
+void	init_philos(long long num, t_system *philo_system)
 {
-	int			i;
-	t_philos	*philos;
-	t_info		*philos_info;
+	long long	i;
+	t_philo	philo;
 
 	i = 0;
-	philo_info = philo_system->philos_info;
-	philos_system->philos = (t_philo)malloc(sizeof(t_philo * philo_info->philos_num));
-	philos = philo_system->philos;
-	if (!philos)
-		return ();
-	while (i < philo_info->philos_num)
+	philo_system->philos = (t_philo *)malloc(sizeof(t_philo) * num);
+	if (!philo_system->philos)
+		return ;
+	while (i < num)
 	{
-		philos[i]->philo_num = i + 1;
-		philos[i]->num_ate = 0;
+		philo = (philo_system->philos)[i];
+		philo.philo_num = i + 1;
+		philo.num_ate = 0;
+		philo.right_fork = NULL;
+		philo.left_fork = NULL;
 		// pthread_create(philos[i].philo_id, NULL, (void *)function, philo_sywstem);
 		i++;
 	}
-	// 쓰레드 잘 만들어졌는지 체크해야 됨
-	return (0);
 }
 
-int	init_monitors(t_system *philos_system)
+void	init_monitors(long long num, t_system *philo_system)
 {
-	t_forks		*forks;
-	int			i;
+	long long	i;
+	t_monitor	*monitor;
 
 	i = 0;
-	philos_system->forks = (t_forks)malloc(sizeof())
+	philo_system->monitors = (t_monitor *)malloc(sizeof(t_monitor) * num);
+	if (!philo_system->monitors)
+		return ;
+	while (i < num)
+	{
+		monitor = (philo_system->monitors)[i];
+		monitor->monitor_num = i + 1;
+		monitor->monitoring_philo = (philo_system->philos)[i];
+		// pthread_create(philos[i].philo_id, NULL, (void *)function, philo_sywstem);
+		i++;
+	}
 }
 
-int	init_forks(t_system *philos_system)
+void	init_forks(long long num, t_system *philo_system)
 {
+	long long	i;
+	t_fork	*fork;
 
+	i = 0;
+	philo_system->forks = (t_fork *)malloc(sizeof(t_fork) * num);
+	if (!philo_system->forks)
+		return ;
+	while (i < num)
+	{
+		fork = (philo_system->forks)[i];
+		fork->index = i + 1;
+		// pthread_mutex_init(fork->mutex_fork, NULL);
+		// 뮤텍스 생성 에러 처리 해야함
+	}
 }
 
-int	init_shared(t_system *philos_system)
+void	init_shared(t_system *philos_system)
 {
+	t_shared	*shared;
 
+	philos_system->shared = (t_shared)malloc(sizeof(t_shared));
+	shared = philos_system->shared;
+	shared->philo_status = ALIVE;
+	// shared->current_time = 0;
+	// shared->starting_time = 0;
+	// pthread_mutex_init(print_status);
+	// 뮤텍스 에러 확인
 }
