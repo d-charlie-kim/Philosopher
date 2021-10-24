@@ -6,30 +6,12 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 14:37:40 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 15:14:10 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 #define ALIVE 3;
-
-void	init_info(int argc, char **argv, t_system *philo_system)
-{
-	t_info	*info;
-
-	philo_system->philo_info = (t_info *)malloc(sizeof(t_info));
-	if (philo_system->philo_info == NULL)
-		return ;
-	info = philo_system->philo_info;
-	info->philos_num = ft_atoll(argv[1]);
-	info->time_to_die = ft_atoll(argv[2]);
-	info->time_to_eat = ft_atoll(argv[3]);
-	info->time_to_sleep = ft_atoll(argv[4]);
-	if (argc == 6)
-		info->max_eat = ft_atoll(argv[5]);
-	else
-		info->max_eat = -1;
-}
 
 void	init_philos(long long num, t_system *philo_system)
 {
@@ -86,6 +68,7 @@ void	init_forks(long long num, t_system *philo_system)
 		(fork[i]).index = i + 1;
 		// pthread_mutex_init(fork->mutex_fork, NULL);
 		// 뮤텍스 생성 에러 처리 해야함
+		i++;
 	}
 }
 
@@ -103,3 +86,5 @@ void	init_shared(t_system *philos_system)
 	// pthread_mutex_init(print_status);
 	// 뮤텍스 에러 확인
 }
+
+void	init_time();
