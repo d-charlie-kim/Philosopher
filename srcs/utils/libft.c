@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 16:50:34 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/19 16:05:52 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 14:35:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_strlen(char *str)
 {

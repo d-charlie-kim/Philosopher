@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 01:32:14 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 14:31:33 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef struct s_info
 	long long	max_eat;
 }	t_info;
 
+typedef struct s_shared
+{
+	int				philo_status;
+	pthread_mutex_t	print_status;
+	long long		current_time;
+	long long		time;
+}	t_shared;
+
+typedef struct s_fork
+{
+	pthread_mutex_t	mutex_fork;
+	long long		index;
+}	t_fork;
+
 typedef struct s_philo
 {
 	long long	philo_num;
@@ -39,20 +53,6 @@ typedef struct s_monitor
 	long long	monitor_num;
 	t_philo		*monitoring_philo;
 }	t_monitor;
-
-typedef struct s_shared
-{
-	int				philo_status;
-	pthread_mutex_t	print_status;
-	long long		current_time;
-	long long		time;
-}	t_shared;
-
-typedef struct s_fork
-{
-	pthread_mutex_t	mutex_fork;
-	long long		index;
-}	t_fork;
 
 typedef struct s_system
 {

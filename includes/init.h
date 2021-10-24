@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:25:35 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 01:25:36 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 14:36:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define INIT_H
 
 #include "struct.h"
+#include "libft.h"
+#include <stdlib.h>
 
 t_system	*init_system(int argc, char **argv);
 void		init_info(int argc, char **argv, t_system *philo_system);

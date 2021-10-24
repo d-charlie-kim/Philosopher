@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_system.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:44:26 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/20 20:36:48 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 14:38:29 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#include "struct.h"
 
 t_system	*init_system(int argc, char **argv)
 {
@@ -21,9 +20,11 @@ t_system	*init_system(int argc, char **argv)
 	if (!system)
 		return (NULL);
 	init_info(argc, argv, system);
-	init_philos(argv[2], system);
-	init_monitors(argv[2], system);
-	init_forks(argv[2], system);
+	if (!system->philo_info)
+		return (NULL);
+	init_philos(system->philo_info->philos_num, system);
+	init_monitors(system->philo_info->philos_num, system);
+	init_forks(system->philo_info->philos_num, system);
 	init_shared(system);
 	if (!system->philos || !system->philo_info || !system->shared \
 		|| !system->forks || !system-> monitors)

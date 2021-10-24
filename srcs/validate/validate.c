@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:25:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/19 16:06:07 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/24 14:38:44 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <validate.h>
+#include "validate.h"
+#include <stdio.h>
 
 int	validate_arg(int argc, char **argv)
 {
