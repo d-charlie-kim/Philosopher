@@ -6,7 +6,7 @@
 #    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 21:17:00 by dokkim            #+#    #+#              #
-#    Updated: 2021/10/24 14:33:13 by dokkim           ###   ########.fr        #
+#    Updated: 2021/10/27 19:06:58 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = ./srcs/main.c \
 		./srcs/init/init_info.c \
 		./srcs/init/init_system.c \
 		./srcs/utils/libft.c \
-		./srcs/validate/validate.c
+		./srcs/validate/validate.c \
+		./srcs/execute/setting.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,11 +6,12 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/25 18:40:36 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/27 21:13:34 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
+#define ALIVE 3;
 
 void	init_philos(long long num, t_system *philo_system)
 {
@@ -24,11 +25,12 @@ void	init_philos(long long num, t_system *philo_system)
 	philo = philo_system->philos;
 	while (i < num)
 	{
-		(philo[i]).philo_num = i + 1;
+		(philo[i]).philo_index = i + 1;
 		(philo[i]).num_ate = 0;
-		(philo[i]).right_fork = NULL;
-		(philo[i]).left_fork = NULL;
-		// pthread_create(philos[i].philo_id, NULL, (void *)function, philo_sywstem);
+		(philo[i]).philo_system = philo_system;
+		setting_philo(&(philo[i]), philo_system);
+		// pthread_create(philo[i].philo_id, NULL, philosophers, &(philo[i]));
+		// 쓰레드 생성때 에러 처리
 		i++;
 	}
 }
@@ -47,7 +49,9 @@ void	init_monitors(long long num, t_system *philo_system)
 	{
 		(monitor[i]).monitor_num = i + 1;
 		(monitor[i]).monitoring_philo = &((philo_system->philos)[i]);
-		// pthread_create(philos[i].philo_id, NULL, (void *)function, philo_sywstem);
+		(monitor[i]).philo_system = philo_system;
+		// pthread_create(monitor[i].monitor_id, NULL, monitors, &(monitor[i]));
+		// 쓰레드 생성때 에러 처리
 		i++;
 	}
 }
@@ -64,8 +68,8 @@ void	init_forks(long long num, t_system *philo_system)
 	fork = philo_system->forks;
 	while (i < num)
 	{
-		(fork[i]).index = i + 1;
-		// pthread_mutex_init(fork->mutex_fork, NULL);
+		(fork[i]).fork_index = i + 1;
+		pthread_mutex_init(&((fork[i]).mutex_id), NULL);
 		// 뮤텍스 생성 에러 처리 해야함
 		i++;
 	}
@@ -80,16 +84,19 @@ void	init_shared(t_system *philos_system)
 		return ;
 	shared = philos_system->shared;
 	shared->philo_status = ALIVE;
-	// shared->current_time = 0;
-	// shared->starting_time = 0;
-	// pthread_mutex_init(print_status);
+	pthread_mutex_init(&(shared->print_status), NULL);
 	// 뮤텍스 에러 확인
 }
 
-void	init_time();
+void	init_time(t_system *philos_system)
+{
+	t_time	*time;
 
-
-뮤텍스는
-출력 제한(출력 겹치지 않게)
-포크 제한(포크 못 가져가게)
-시간 제한(시작 시점 동시에 만들기 위함)
+	philos_system->time = (t_time *)malloc(sizeof(t_time));
+	time = philos_system->time;
+	time->current_time = 0;
+	time->starting_time = 0;
+	pthread_mutex_init(&(time->time_start), NULL);
+	pthread_mutex_lock(&(time->time_start));
+	// 뮤텍스 에러 확인
+}

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:44:26 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 15:12:57 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/27 18:55:39 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ t_system	*init_system(int argc, char **argv)
 	init_info(argc, argv, system);
 	if (!system->philo_info)
 		return (NULL);
-	init_philos(system->philo_info->philos_num, system);
 	init_monitors(system->philo_info->philos_num, system);
 	init_forks(system->philo_info->philos_num, system);
 	init_shared(system);
+	init_philos(system->philo_info->philos_num, system);
+	init_time(system);
 	if (!system->philos || !system->philo_info || !system->shared \
-		|| !system->forks || !system-> monitors)
+		|| !system->forks || !system-> monitors || !system->time)
 		return (NULL);
 	return (system);
 }
