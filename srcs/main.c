@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:24:59 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/27 21:22:58 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/27 21:36:33 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char *argv[])
 	}
 	// if (execute(philo_system->shared));
 	// 	error("error why");
-	printf("aaa : %lld\n", philo_system->philos[3].left_fork->fork_index);
 	printf("PROGRAM END\n");
 	return (0);
 }
