@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 14:31:33 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/27 02:05:10 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_info
 typedef struct s_shared
 {
 	int				philo_status;
+	long long		all_ate_philo_num;
 	pthread_mutex_t	print_status;
 	long long		current_time;
 	long long		time;

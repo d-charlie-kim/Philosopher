@@ -6,12 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 15:14:10 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/10/25 18:40:36 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#define ALIVE 3;
 
 void	init_philos(long long num, t_system *philo_system)
 {
@@ -88,3 +87,9 @@ void	init_shared(t_system *philos_system)
 }
 
 void	init_time();
+
+
+뮤텍스는
+출력 제한(출력 겹치지 않게)
+포크 제한(포크 못 가져가게)
+시간 제한(시작 시점 동시에 만들기 위함)
