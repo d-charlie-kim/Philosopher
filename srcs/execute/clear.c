@@ -6,8 +6,14 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:28:27 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/28 19:33:33 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:27:10 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#
+void clear_mutex();
+
+void clear_pthread();
+
+void clear_all();
+
+void clear_memory();
