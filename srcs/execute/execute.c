@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting.c                                          :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:20:46 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/28 17:43:47 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 03:34:52 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
 #include "init.h"
 
-void	setting_philo(t_system *philo_system)
+void	put_philos_forks(t_system *philo_system)
 {
 	long long	i;
 	long long	philos_num;
@@ -30,4 +30,10 @@ void	setting_philo(t_system *philo_system)
 			philo->right_fork = &(philo_system->forks[philo[i].philo_index]);
 		i++;
 	}
+}
+
+void	execution()
+{
+	put_philos_forks();
+	time_start();
 }
