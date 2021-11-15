@@ -6,70 +6,83 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:20:53 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/03 18:21:44 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 03:31:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 #include "struct.h"
 
-void	ft_wait(long long time);
+void	waiting(long long time)
 {
+	long long	i;
+	long long	j;
+
+	i = 0;
 	while (i < time)
 	{
-		usleep();
+		j = 0;
+		while (j < 1000)
+		{
+			usleep(1);
+			j++;
+		}
 		i++;
 	}
 }
 
-void	eating()
+void	eating(t_philo *philo)
 {
-	// print mutex lock
-	// print eating 시간
-	// print mutex unloc
-	// ft_wait
+	philo->num_ate++;
+	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
+	printing(philo, "is eating");
+	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
+	waiting(philo->philo_system->philo_info->time_to_eat);
 }
 
-void	take_fork()
+void	taking_fork(t_philo *philo)
 {
-	// l_fork mutex lock
-	// 왼쪽 포크 쥔다.
-	// print mutex lock
-	// 왼쪽 포크 쥐었다고 print
-	// print mutex unlock
-	// r_fork mutex lock
-	// 오른쪽 포크 쥔다
-	// print mutex lock
-	// 오른쪽 포크 쥐었다고 print
-	// print mutex unlock
-	// eating 함수로 갑니다
-	// l_fork mutex unlock
-	// r_fork mutex unlock
+	pthread_mutex_lock(&(philo->left_fork));
 
+	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
+	printing(philo, "has taken a left fork");
+	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
+	
+	pthread_mutex_lock(&(philo->right_fork));
+
+	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
+	printing(philo, "has taken a right fork");
+	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
+
+	eating(philo);
+
+	pthread_mutex_unlock(&(philo->left_fork));
+	pthread_mutex_unlock(&(philo->right_fork));
 
 	// lock unlock 할때 매번 에러 체크 해줘야 합니다
 }
 
-void	ft_print()
+void	printing(t_philo *philo, char *str)
 {
-	// 시간 계산 함수
-	// 출력
+	long long	elapsed_time;
+	elapsed_time = get_elapsed_time(philo->philo_system->shared);
+	printf("%lldms  Philo No.%lld ---->", elapsed_time, philo->philo_index);
+	printf(" %s\n", str);
 }
 
-void	sleeping()
+void	sleeping(t_philo *philo)
 {
-	// print mutex lock
-	// print 함수
-	// print mutex unlock
-	// ft_wait(시간)
+	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
+	printing(philo, "is sleeping");
+	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
+	waiting(philo->philo_system->philo_info->time_to_sleep);
 }
 
-void	thinking()
+void	thinking(t_philo *philo)
 {
-	// print mutex lock
-	// print 함수
-	// print mutex unlock
-	// ft_wait(시간)
+	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
+	printing(philo, "is thinking");
+	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 }
 
 void	*philosophers(void *philosopher)
@@ -77,15 +90,16 @@ void	*philosophers(void *philosopher)
 	t_philo	*philo;
 
 	philo = (t_philo *)philosopher;
-	// 철학자가 아무도 죽지 않았거나
-	// 먹어야 하는 횟수만큼 다 먹지 못했다면
-	// 계속 돌아라
-	pthread_mutex_lock(&(philo->philo_system->time->time_stat));
-	while (system->shared->philo_status || (system->philo_info->max_eat > 0 && system->philos[i]->num_ate < system->philo_info->max_eat)
+	while (philo->philo_system->shared->time_status == NOT_START)
+		;
+	while (philo->philo_system->shared->philo_status == ALIVE \
+	|| (philo->philo_system->shared->all_ate_philo_num > 0 \
+	&& philo->num_ate < philo->philo_system->shared->all_ate_philo_num))
 	{
-		take_fork();
-		sleeping();
-		thinking();
+		taking_fork(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
-	// done 끝났다는거 보내줘야 함
-}
+	if (philo->num_ate == philo->philo_system->shared->all_ate_philo_num)
+		philo->philo_system->shared->all_ate_philo_num++;
+ }

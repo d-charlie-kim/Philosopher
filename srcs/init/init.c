@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/28 19:19:02 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 01:53:47 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ int	init_shared(t_system *philo_system)
 	shared = philo_system->shared;
 	shared->philo_status = ALIVE;
 	shared->current_time = 0;
+	shared->elapsed_time = 0;
 	shared->all_ate_philo_num = 0;
+	shared->starting_time = 0;
 	if (pthread_mutex_init(&(shared->print_status), NULL))
-		return ;
-	if (pthread_mutex_init(&(shared->time_start), NULL))
-		return ;
-	if (pthread_mutex_lock(&(shared->time_start)))
 		return ;
 	return (0);
 }
@@ -68,7 +66,6 @@ int	init_forks(long long num, t_system *philo_system)
 	if (!philo_system->forks)
 	{
 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		pthread_mutex_destroy(&(philo_system->shared->time_start));
 		error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
 		return (-1);
 	}
@@ -80,7 +77,6 @@ int	init_forks(long long num, t_system *philo_system)
 		{
 			// 뮤텍스 전부 파괴하는 함수 하나
 			pthread_mutex_destroy(&(philo_system->shared->print_status));
-			pthread_mutex_destroy(&(philo_system->shared->time_start));
 			error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
 			return (-1);
 		}
@@ -100,7 +96,6 @@ int	init_philos(long long num, t_system *philo_system)
 	{
 		// 포크 뮤텍스 전부 파괴하는 함수 하나
 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		pthread_mutex_destroy(&(philo_system->shared->time_start));
 		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
 		return (-1);
 	}
@@ -115,7 +110,6 @@ int	init_philos(long long num, t_system *philo_system)
 			// 쓰레드 전부 없애주는 함수 하나
 			// 포크 뮤텍스 전부 파괴하는 함수 하나
 			pthread_mutex_destroy(&(philo_system->shared->print_status));
-			pthread_mutex_destroy(&(philo_system->shared->time_start));
 			error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
 			return (-1);
 		}
@@ -131,7 +125,6 @@ int	init_monitor(t_system *philo_system)
 		// 필로 쓰레드 전부 없애주는 함수 하나
 		// 포크 뮤텍스 전부 파괴하는 함수 하나
 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		pthread_mutex_destroy(&(philo_system->shared->time_start));
 		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
 		return (-1);
 	}
