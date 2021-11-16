@@ -6,12 +6,12 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 01:53:47 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:05:23 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#define ALIVE 3;
+#include "execute.h"
 
 int	init_info(int argc, char **argv, t_system *philo_system)
 {
@@ -42,7 +42,7 @@ int	init_shared(t_system *philo_system)
 	philo_system->shared = (t_shared *)malloc(sizeof(t_shared));
 	if (!philo_system->shared)
 	{
-		error(philo_system->philo_info, philo_system, NULL, NULL);
+		// error(philo_system->philo_info, philo_system, NULL, NULL);
 		return (-1);
 	}
 	shared = philo_system->shared;
@@ -51,8 +51,9 @@ int	init_shared(t_system *philo_system)
 	shared->elapsed_time = 0;
 	shared->all_ate_philo_num = 0;
 	shared->starting_time = 0;
+	shared->time_status = NOT_START;
 	if (pthread_mutex_init(&(shared->print_status), NULL))
-		return ;
+		return (-1);
 	return (0);
 }
 
@@ -66,18 +67,18 @@ int	init_forks(long long num, t_system *philo_system)
 	if (!philo_system->forks)
 	{
 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
+		// error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
 		return (-1);
 	}
 	fork = philo_system->forks;
 	while (i < num)
 	{
 		(fork[i]).fork_index = i + 1;
-		if (pthread_mutex_init(&((fork[i]).mutex_id), NULL))
+		if (pthread_mutex_init(&((fork[i]).fork_mutex), NULL))
 		{
 			// 뮤텍스 전부 파괴하는 함수 하나
 			pthread_mutex_destroy(&(philo_system->shared->print_status));
-			error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
+			// error(philo_system->philo_info, philo_system->shared, philo_system, NULL);
 			return (-1);
 		}
 		i++;
@@ -96,7 +97,7 @@ int	init_philos(long long num, t_system *philo_system)
 	{
 		// 포크 뮤텍스 전부 파괴하는 함수 하나
 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
+		// error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
 		return (-1);
 	}
 	philo = philo_system->philos;
@@ -105,12 +106,12 @@ int	init_philos(long long num, t_system *philo_system)
 		(philo[i]).philo_index = i + 1;
 		(philo[i]).num_ate = 0;
 		(philo[i]).philo_system = philo_system;
-		if (pthread_create(philo[i].philo_id, NULL, philosophers, &(philo[i])))
+		if (pthread_create(&(philo[i].philo_id), NULL, philosophers, &philo[i]))
 		{
 			// 쓰레드 전부 없애주는 함수 하나
 			// 포크 뮤텍스 전부 파괴하는 함수 하나
 			pthread_mutex_destroy(&(philo_system->shared->print_status));
-			error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
+			// error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
 			return (-1);
 		}
 		i++;
@@ -118,15 +119,15 @@ int	init_philos(long long num, t_system *philo_system)
 	return (0);
 }
 
-int	init_monitor(t_system *philo_system)
-{
-	if (pthread_create(&(philo_system->monitor_id), NULL, monitor, philo_system))
-	{
-		// 필로 쓰레드 전부 없애주는 함수 하나
-		// 포크 뮤텍스 전부 파괴하는 함수 하나
-		pthread_mutex_destroy(&(philo_system->shared->print_status));
-		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
-		return (-1);
-	}
-	return (0);
-}
+// int	init_monitor(t_system *philo_system)
+// {
+// 	if (pthread_create(&(philo_system->monitor_id), NULL, monitor, philo_system))
+// 	{
+// 		// 필로 쓰레드 전부 없애주는 함수 하나
+// 		// 포크 뮤텍스 전부 파괴하는 함수 하나
+// 		pthread_mutex_destroy(&(philo_system->shared->print_status));
+// 		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
+// 		return (-1);
+// 	}
+// 	return (0);
+// }

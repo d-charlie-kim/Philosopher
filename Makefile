@@ -6,7 +6,7 @@
 #    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 21:17:00 by dokkim            #+#    #+#              #
-#    Updated: 2021/10/27 19:06:58 by dokkim           ###   ########.fr        #
+#    Updated: 2021/11/16 16:45:59 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,13 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
 SRCS = ./srcs/main.c \
-		./srcs/init/init_info.c \
+		./srcs/init/init.c \
 		./srcs/init/init_system.c \
 		./srcs/utils/libft.c \
 		./srcs/validate/validate.c \
-		./srcs/execute/setting.c
+		./srcs/execute/time.c \
+		./srcs/execute/execute.c \
+		./srcs/execute/philosophers.c
 
 OBJS = $(SRCS:.c=.o)
 

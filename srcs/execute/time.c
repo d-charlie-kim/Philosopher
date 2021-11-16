@@ -6,20 +6,24 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 01:47:31 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 03:32:00 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:45:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	time_check()
+#include <sys/time.h>
+#include <struct.h>
+
+// void	time_check()
+// {
+	// 죽었니 살았니 
+// }
+
+long long	get_elapsed_time(t_philo *philo)
 {
-	죽었니 살았니
-}
+	long long		current_time;
+	struct timeval	tv;
 
-long long	get_elapsed_time()
-{
-	gettimeofday
-
-	tv_sec * 1000 + tv_usec / 1000 == 현재 시간
-
-	return(현재시간)
+	gettimeofday(&tv, NULL);
+	current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (current_time - philo->philo_system->shared->starting_time);
 }

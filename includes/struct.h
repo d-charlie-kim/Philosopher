@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 02:47:09 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/16 18:13:20 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 typedef struct s_system t_system;
 
-typedef struct s_time;
+typedef struct s_time
 {
 	long tv_sec;
 	long tv_usec;
@@ -59,7 +59,7 @@ typedef struct s_shared
 typedef struct s_fork
 {
 	long long		fork_index;
-	pthread_mutex_t	mutex_id;
+	pthread_mutex_t	fork_mutex;
 }	t_fork;
 
 typedef struct s_philo
@@ -81,6 +81,7 @@ typedef struct s_system
 	t_fork		*forks;
 }	t_system;
 
-void	setting_philo(t_system *philo_system);
+void		put_philos_forks(t_system *philo_system);
+long long	get_elapsed_time(t_philo *philo);
 
 #endif
