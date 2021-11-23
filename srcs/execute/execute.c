@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:20:46 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 21:11:03 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/18 22:05:31 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	execution(t_system *philo_system)
 	
 	gettimeofday(&tv, NULL);
 	philo_system->shared->starting_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	philo_system->shared->time_status = START; 
+	philo_system->shared->time_status = START;
 }

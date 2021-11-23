@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 19:05:23 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/18 22:15:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ int	init_shared(t_system *philo_system)
 	}
 	shared = philo_system->shared;
 	shared->philo_status = ALIVE;
-	shared->current_time = 0;
 	shared->elapsed_time = 0;
-	shared->all_ate_philo_num = 0;
+	shared->all_ate_num = 0;
 	shared->starting_time = 0;
 	shared->time_status = NOT_START;
 	if (pthread_mutex_init(&(shared->print_status), NULL))

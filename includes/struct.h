@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 18:13:20 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/18 22:15:08 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ typedef struct s_shared
 {
 	int				philo_status;
 	int				time_status;
-	long long		all_ate_philo_num;
+	long long		all_ate_num;
 	long long		starting_time;
-	long long		current_time;
 	long long		elapsed_time;
 	pthread_mutex_t	print_status;
 }	t_shared;
