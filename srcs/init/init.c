@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/18 22:15:14 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/24 18:12:26 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	init_forks(long long num, t_system *philo_system)
 	fork = philo_system->forks;
 	while (i < num)
 	{
-		(fork[i]).fork_index = i + 1;
 		if (pthread_mutex_init(&((fork[i]).fork_mutex), NULL))
 		{
 			// 뮤텍스 전부 파괴하는 함수 하나
@@ -102,6 +101,7 @@ int	init_philos(long long num, t_system *philo_system)
 	philo = philo_system->philos;
 	while (i < num)
 	{
+		(philo[i]).last_meal_time = 0;
 		(philo[i]).philo_index = i + 1;
 		(philo[i]).num_ate = 0;
 		(philo[i]).philo_system = philo_system;
@@ -118,15 +118,15 @@ int	init_philos(long long num, t_system *philo_system)
 	return (0);
 }
 
-// int	init_monitor(t_system *philo_system)
-// {
-// 	if (pthread_create(&(philo_system->monitor_id), NULL, monitor, philo_system))
-// 	{
-// 		// 필로 쓰레드 전부 없애주는 함수 하나
-// 		// 포크 뮤텍스 전부 파괴하는 함수 하나
-// 		pthread_mutex_destroy(&(philo_system->shared->print_status));
-// 		error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
-// 		return (-1);
-// 	}
-// 	return (0);
-// }
+int	init_monitor(t_system *philo_system)
+{
+	if (pthread_create(&(philo_system->monitor_id), NULL, monitor, philo_system))
+	{
+		// 필로 쓰레드 전부 없애주는 함수 하나
+		// 포크 뮤텍스 전부 파괴하는 함수 하나
+		// pthread_mutex_destroy(&(philo_system->shared->print_status));
+		// error(philo_system->philo_info, philo_system->shared, philo_system->forks, philo_system);
+		return (-1);
+	}
+	return (0);
+}

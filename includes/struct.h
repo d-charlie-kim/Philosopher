@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/18 22:15:08 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/24 18:05:07 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STRUCT_H
 
 # include <pthread.h>
+
+# define ERROR -1
 
 # define SLEEPING 1
 # define EATING 2
@@ -29,12 +31,6 @@
 # define DONE 0
 
 typedef struct s_system t_system;
-
-typedef struct s_time
-{
-	long tv_sec;
-	long tv_usec;
-}	t_time;
 
 typedef struct s_info
 {
@@ -57,13 +53,13 @@ typedef struct s_shared
 
 typedef struct s_fork
 {
-	long long		fork_index;
 	pthread_mutex_t	fork_mutex;
 }	t_fork;
 
 typedef struct s_philo
 {
 	long long	philo_index;
+	long long	last_meal_time;
 	long long	num_ate;
 	pthread_t	philo_id;
 	t_fork		*right_fork;
@@ -81,6 +77,6 @@ typedef struct s_system
 }	t_system;
 
 void		put_philos_forks(t_system *philo_system);
-long long	get_elapsed_time(t_philo *philo);
+long long	get_elapsed_time(t_system *system);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:44:26 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 17:28:53 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/11/24 18:07:47 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_system(int argc, char **argv, t_system *system)
 		return (-1);
 	if (init_philos(system->philo_info->philos_num, system)) // 말록 하나와 쓰레드 여러개
 		return (-1);
-	// if (init_monitor(system)) // 쓰레드 하나
-	// 	return (-1);
+	if (init_monitor(system)) // 쓰레드 하나
+		return (-1);
 	return (0);
 }
