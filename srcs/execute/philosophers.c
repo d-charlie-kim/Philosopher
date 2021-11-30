@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:20:53 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 17:59:30 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 03:14:19 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,25 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&(philo->right_fork->fork_mutex));
 }
 
-void	taking_fork(t_philo *philo)
+int	taking_fork(t_philo *philo)
 {
+	if (philo->philo_system->shared->philo_status != ALIVE)
+		return (1);
 	pthread_mutex_lock(&(philo->left_fork->fork_mutex));
 
 	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
 	printing(philo, "has taken a left fork");
 	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 	
+	if (philo->philo_system->shared->philo_status != ALIVE)
+		return (1);
 	pthread_mutex_lock(&(philo->right_fork->fork_mutex));
 
 	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
 	printing(philo, "has taken a right fork");
 	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 	// lock unlock 할때 매번 에러 체크 해줘야 합니다
+	return (0);
 }
 
 void	printing(t_philo *philo, char *str)
@@ -67,8 +72,11 @@ void	printing(t_philo *philo, char *str)
 	
 	time = get_elapsed_time(philo->philo_system);
 	if (time == ERROR)
-		;
-	printf("%5lldms  Philo No.%4lld ---->", time, philo->philo_index);
+	{
+		return ;
+		// 에러처리 해주세요
+	}
+	printf("%5lldms  Philo No.%3lld ---->", time, philo->philo_index);
 	printf(" %s\n", str);
 }
 
@@ -98,7 +106,8 @@ void	*philosophers(void *philosopher)
 		waiting(philo, (philo->philo_system->philo_info->time_to_eat) / 2);
 	while (philo->philo_system->shared->philo_status == ALIVE)
 	{
-		taking_fork(philo);
+		if (taking_fork(philo))
+			return (NULL);
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
@@ -112,7 +121,7 @@ void	*philosophers(void *philosopher)
 	1. 철학자 전부가 해당 숫자만큼 다 먹으면 끝내는 파트 -> 모니터 안으로 들어감
 	2. 철학자 죽이고 감시하는 모니터 파트 (dead 출력까지 들어감)
 	3. 정상 종료 했을때, 전부 destroy free 해주는 파트
-	4. 에러 처리 (lock unlock gettimeofday 또 뭐 있지)
+	4. 에러 처리 (lock unlock gettimeofday 또 뭐 있지)
 	5. 출력물 색상 추가
 	6. 놈 정리
 */

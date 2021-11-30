@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:24:59 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/16 21:08:18 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 02:53:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char *argv[])
 {
 	t_system	*philo_system;
 
-
 	validate_arg(argc, argv);
 	// if (!validate_arg(argc, argv))
 	// 	return (ft_error(ARGUMENTS_ERROR));
@@ -34,16 +33,26 @@ int	main(int argc, char *argv[])
 	// 	return (ft_error(INITIALIZATION_ERROR));
 	execution(philo_system);
 	// 	return (ft_error(EXECUTE_ERROR));
-	// ending();
-	while (1);
+	printf("aaa\n");
+	clear(philo_system);
 	printf("PROGRAM END\n");
 	return (0);
 }
 
-// ending(system)
-// {
-// 	뮤텍스 전부 destroy 하고
-// 	pthread 전부 끝내고
-// 	malloc 전부 free 하고 나서
-// 	return
-// }
+void	clear(t_system *system)
+{
+	long long	i;
+
+	i = 0;
+	pthread_mutex_destroy(&system->shared->print_status);
+	while (i < system->philo_info->philos_num)
+	{
+		pthread_mutex_destroy(&system->forks[i].fork_mutex);
+		i++;
+	}
+	free (system->forks);
+	free (system->philos);
+	free (system->philo_info);
+	free (system->shared);
+	free (system);
+}

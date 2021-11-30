@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:20:46 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 17:39:43 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 03:09:40 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ void	put_philos_forks(t_system *philo_system)
 	}
 }
 
+void	join_thread(t_system *system)
+{
+	int			*status;
+	long long	i;
+	t_philo		*philos;
+	
+	i = 0;
+	philos = system->philos;
+	while (i < system->philo_info->philos_num)
+	{
+		pthread_join(philos[i].philo_id, (void **)&status);
+		i++;
+	}
+	// 요것도 에러처리
+}
+
 void	execution(t_system *philo_system)
 {
 	struct timeval	tv;
@@ -45,4 +61,6 @@ void	execution(t_system *philo_system)
 	gettimeofday(&tv, NULL);
 	philo_system->shared->starting_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	philo_system->shared->time_status = START;
+	pthread_detach(philo_system->monitor_id);
+	join_thread(philo_system);
 }

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:21:01 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 18:28:50 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 02:45:35 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	is_dead(t_system *system)
 		time = get_elapsed_time(system);
 		if (time - system->philos[i].last_meal_time > system->philo_info->time_to_die)
 		{
+			system->shared->philo_status = DEAD;
 			pthread_mutex_lock(&(system->shared->print_status));
 			printing(&(system->philos[i]), "is dead");
 			return (1);
@@ -59,9 +60,7 @@ int	is_dead(t_system *system)
 void	*monitor(void *system)
 {
 	t_system	*philo_system;
-	int i;
 
-	i = 0;
 	philo_system = (t_system *)system;
 	while (philo_system->shared->time_status == NOT_START)
 		;
@@ -72,7 +71,6 @@ void	*monitor(void *system)
 		if (is_dead(philo_system))
 			break ;
 	}
-	printf("ENDENDENDEND\n");
 	return (NULL);
 	// clear_all 함수 로 가는 거
 

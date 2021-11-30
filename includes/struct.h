@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 18:05:07 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 02:33:25 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ typedef struct s_system
 
 void		put_philos_forks(t_system *philo_system);
 long long	get_elapsed_time(t_system *system);
+void	join_thread(t_system *system);
+void	clear(t_system *system);
 
 #endif
