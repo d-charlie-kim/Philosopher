@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 18:12:26 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 02:17:28 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	init_forks(long long num, t_system *philo_system)
 	fork = philo_system->forks;
 	while (i < num)
 	{
+		fork->fork_status = FREE;
 		if (pthread_mutex_init(&((fork[i]).fork_mutex), NULL))
 		{
 			// 뮤텍스 전부 파괴하는 함수 하나

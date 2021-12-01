@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:21:01 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/02 02:13:37 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 02:30:48 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int	is_done(t_system *system)
 	{
 		pthread_mutex_lock(&(system->shared->print_status));
 		system->shared->philo_status = DONE;
+		i = 0;
+		while (i < system->philo_info->philos_num)
+		{
+			if (system->forks[i].fork_status == TAKEN)
+				pthread_mutex_unlock(&(system->forks[i].fork_mutex));
+			i++;
+		}
+		pthread_mutex_unlock(&(system->shared->print_status));
 		return (1);
 	}
 	return (0);
@@ -51,9 +59,10 @@ int	is_dead(t_system *system)
 			pthread_mutex_lock(&(system->shared->print_status));
 			printing(&(system->philos[i]), "is dead");
 			pthread_mutex_unlock(&(system->shared->print_status));
-			// pthread_mutex_unlock(&(system->philos[i].left_fork));
-			if (system->philo_info->philos_num == 1)
+			if (system->philos[i].left_fork->fork_status == TAKEN)
 				pthread_mutex_unlock(&(system->philos[i].left_fork->fork_mutex));
+			if (system->philos[i].right_fork->fork_status == TAKEN)
+				pthread_mutex_unlock(&(system->philos[i].right_fork->fork_mutex));
 			return (1);
 		}
 		i++;

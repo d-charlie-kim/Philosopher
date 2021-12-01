@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:20:53 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/01 21:54:59 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 02:19:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,25 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 	waiting(philo, philo->philo_system->philo_info->time_to_eat);
 	pthread_mutex_unlock(&(philo->left_fork->fork_mutex));
+	philo->left_fork->fork_status = FREE;
 	pthread_mutex_unlock(&(philo->right_fork->fork_mutex));
+	philo->right_fork->fork_status = FREE;
 }
 
 void	taking_fork(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->left_fork->fork_mutex));
+	philo->left_fork->fork_status = TAKEN;
 	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
 	if (philo->philo_system->shared->philo_status == ALIVE)
 		printing(philo, "has taken a left fork");
 	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 	pthread_mutex_lock(&(philo->right_fork->fork_mutex));
+	philo->right_fork->fork_status = TAKEN;
 	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
 	if (philo->philo_system->shared->philo_status != ALIVE)
 	{
-		pthread_mutex_unlock(&(philo->philo_system->shared->print_status));			
+		pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 		pthread_mutex_unlock(&(philo->left_fork->fork_mutex));
 		pthread_mutex_unlock(&(philo->right_fork->fork_mutex));
 		return ;

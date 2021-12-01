@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/01 02:33:25 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 02:16:38 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 
 # define ALIVE 1
 # define DONE 0
+
+# define TAKEN 1
+# define FREE 0
 
 typedef struct s_system t_system;
 
@@ -53,6 +56,7 @@ typedef struct s_shared
 
 typedef struct s_fork
 {
+	int				fork_status;
 	pthread_mutex_t	fork_mutex;
 }	t_fork;
 
