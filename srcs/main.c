@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:24:59 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/01 02:53:22 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 01:54:11 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char *argv[])
 	// 	return (ft_error(INITIALIZATION_ERROR));
 	execution(philo_system);
 	// 	return (ft_error(EXECUTE_ERROR));
-	printf("aaa\n");
 	clear(philo_system);
 	printf("PROGRAM END\n");
 	return (0);

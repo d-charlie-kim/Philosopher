@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:21:01 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/01 02:45:35 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/02 02:13:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ int	is_dead(t_system *system)
 			system->shared->philo_status = DEAD;
 			pthread_mutex_lock(&(system->shared->print_status));
 			printing(&(system->philos[i]), "is dead");
+			pthread_mutex_unlock(&(system->shared->print_status));
+			// pthread_mutex_unlock(&(system->philos[i].left_fork));
+			if (system->philo_info->philos_num == 1)
+				pthread_mutex_unlock(&(system->philos[i].left_fork->fork_mutex));
 			return (1);
 		}
 		i++;
@@ -72,8 +76,4 @@ void	*monitor(void *system)
 			break ;
 	}
 	return (NULL);
-	// clear_all 함수 로 가는 거
-
-	// 이게 만약에 딜레이가 더 심해지는데 큰 공헌을 한다면
-	// 모니터를 두개로 나눠서 죽이는 모니터와 끝내는 모니터 두개를 두자
 }

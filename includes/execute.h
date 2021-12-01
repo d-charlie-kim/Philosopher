@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:28:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/01 03:14:10 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/01 03:23:00 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*monitor(void *system);
 void	execution(t_system *philo_system);
 void	waiting(t_philo *philo, long long time);
 void	eating(t_philo *philo);
-int		taking_fork(t_philo *philo);
+void	taking_fork(t_philo *philo);
 void	printing(t_philo *philo, char *str);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
