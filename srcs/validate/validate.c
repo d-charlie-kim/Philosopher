@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:25:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/10/24 14:45:34 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/20 11:24:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 int	validate_arg(int argc, char **argv)
 {
 	if (!(check_count(argc) && check_isdigit(argv) && check_range(argv)))
-	{
-		printf("ARGUMENTS ERROR\n");
-		return (0);
-	}
-	return (1);
+		return (-1);
+	return (0);
 }
 
 int	check_count(int argc)
