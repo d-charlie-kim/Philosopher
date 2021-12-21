@@ -6,13 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:20:46 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 11:23:32 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 20:10:10 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct.h"
-#include "init.h"
-#include <sys/time.h>
+#include "execute.h"
 
 void	put_philos_forks(t_system *philo_system)
 {
@@ -39,7 +37,7 @@ void	put_philos_forks(t_system *philo_system)
 
 void	join_thread(t_system *system)
 {
-	int			*status;
+	void		*status;
 	long long	i;
 	t_philo		*philos;
 	
@@ -47,7 +45,9 @@ void	join_thread(t_system *system)
 	philos = system->philos;
 	while (i < system->philo_info->philos_num)
 	{
-		pthread_join(philos[i].philo_id, (void **)&status);
+		printf("!!!!!\n");
+		pthread_join(philos[i].philo_id, &status);
+		printf("!!!!!\n");
 		i++;
 	}
 	// 요것도 에러처리

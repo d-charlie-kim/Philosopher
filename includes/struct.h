@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 11:28:14 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:45:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,6 @@
 # define STRUCT_H
 
 # include <pthread.h>
-
-# define ERROR -1
-
-# define SLEEPING 1
-# define EATING 2
-# define THINKING 3
-# define GRAB_R 4
-# define GRAB_L 5
-# define DEAD 6
-
-# define NOT_START 1
-# define START 0
-
-# define ALIVE 1
-# define DONE 0
-
-# define TAKEN 1
-# define FREE 0
 
 typedef struct s_system t_system;
 
@@ -79,10 +61,5 @@ typedef struct s_system
 	t_shared	*shared;
 	t_fork		*forks;
 }	t_system;
-
-void		put_philos_forks(t_system *philo_system);
-long long	get_elapsed_time(t_system *system);
-void		join_thread(t_system *system);
-void		clear(t_system *system);
 
 #endif

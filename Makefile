@@ -6,7 +6,7 @@
 #    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 21:17:00 by dokkim            #+#    #+#              #
-#    Updated: 2021/11/24 18:15:02 by dokkim           ###   ########.fr        #
+#    Updated: 2021/12/21 17:54:33 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS = ./srcs/main.c \
 		./srcs/execute/time.c \
 		./srcs/execute/execute.c \
 		./srcs/execute/philosophers.c \
-		./srcs/execute/monitor.c
+		./srcs/execute/monitor.c \
+		./srcs/error/error.c
 
 OBJS = $(SRCS:.c=.o)
 

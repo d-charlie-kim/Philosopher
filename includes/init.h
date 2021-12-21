@@ -6,19 +6,21 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:25:35 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 18:10:39 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:44:40 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	INIT_H
 # define INIT_H
 
+# include <stdlib.h>
 # include "struct.h"
 # include "libft.h"
-# include "philo.h"
-# include <stdlib.h>
+# include "execute.h"
+# include "error.h"
 
 int	init_system(int argc, char **argv, t_system *system);
+
 int	init_info(int argc, char **argv, t_system *philo_system);
 int	init_philos(long long num, t_system *philo_system);
 int	init_monitor(t_system *philo_system);

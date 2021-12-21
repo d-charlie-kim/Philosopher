@@ -6,12 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:24:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/02 02:17:28 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:58:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
-#include "execute.h"
 
 int	init_info(int argc, char **argv, t_system *philo_system)
 {

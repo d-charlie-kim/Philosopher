@@ -6,19 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:25:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 11:24:22 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:41:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validate.h"
-#include <stdio.h>
-
-int	validate_arg(int argc, char **argv)
-{
-	if (!(check_count(argc) && check_isdigit(argv) && check_range(argv)))
-		return (-1);
-	return (0);
-}
 
 int	check_count(int argc)
 {
@@ -64,4 +56,11 @@ int	check_range(char **argv)
 		i++;
 	}
 	return (1);
+}
+
+int	validate_arg(int argc, char **argv)
+{
+	if (!(check_count(argc) && check_isdigit(argv) && check_range(argv)))
+		return (-1);
+	return (0);
 }

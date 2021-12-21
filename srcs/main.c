@@ -6,15 +6,29 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:24:59 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 11:26:16 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:58:40 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "struct.h"
-#include "init.h"
-#include "validate.h"
-#include "execute.h"
+
+void	clear_all(t_system *system)
+{
+	long long	i;
+
+	i = 0;
+	pthread_mutex_destroy(&system->shared->print_status);
+	while (i < system->philo_info->philos_num)
+	{
+		pthread_mutex_destroy(&system->forks[i].fork_mutex);
+		i++;
+	}
+	free (system->forks);
+	free (system->philos);
+	free (system->philo_info);
+	free (system->shared);
+	free (system);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -31,22 +45,4 @@ int	main(int argc, char *argv[])
 	clear_all(philo_system);
 	printf("PROGRAM END\n");
 	return (0);
-}
-
-void	clear(t_system *system)
-{
-	long long	i;
-
-	i = 0;
-	pthread_mutex_destroy(&system->shared->print_status);
-	while (i < system->philo_info->philos_num)
-	{
-		pthread_mutex_destroy(&system->forks[i].fork_mutex);
-		i++;
-	}
-	free (system->forks);
-	free (system->philos);
-	free (system->philo_info);
-	free (system->shared);
-	free (system);
 }

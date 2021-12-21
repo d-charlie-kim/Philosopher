@@ -6,12 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 01:47:31 by dokkim            #+#    #+#             */
-/*   Updated: 2021/11/24 17:59:11 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:49:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "struct.h"
-#include <sys/time.h>
+#include "execute.h"
 
 long long	get_elapsed_time(t_system *system)
 {

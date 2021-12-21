@@ -6,13 +6,11 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:20:53 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/02 02:19:24 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 17:49:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-#include "struct.h"
-#include <unistd.h>
 
 void	waiting(t_philo *philo, long long time)
 {
