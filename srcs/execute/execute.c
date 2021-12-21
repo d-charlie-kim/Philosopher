@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 17:20:46 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/21 20:10:10 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:46:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	join_thread(t_system *system)
 	philos = system->philos;
 	while (i < system->philo_info->philos_num)
 	{
-		printf("!!!!!\n");
 		pthread_join(philos[i].philo_id, &status);
-		printf("!!!!!\n");
 		i++;
 	}
 	// 요것도 에러처리
@@ -59,6 +57,8 @@ int	execution(t_system *philo_system)
 	
 	put_philos_forks(philo_system);
 	gettimeofday(&tv, NULL);
+	if (philo_system->philo_info->max_eat == 0)
+		philo_system->shared->philo_status = DONE;
 	philo_system->shared->starting_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	philo_system->shared->time_status = START;
 	pthread_detach(philo_system->monitor_id);

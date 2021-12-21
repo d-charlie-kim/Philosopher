@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 21:24:59 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/21 17:58:40 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:56:11 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ int	main(int argc, char *argv[])
 	if (validate_arg(argc, argv))
 		return (ft_error(ARGUMENTS_ERROR));
 	philo_system = (t_system *)malloc(sizeof(t_system));
-	init_system(argc, argv, philo_system);
 	if (init_system(argc, argv, philo_system) == -1)
 		return (ft_error(INITIALIZATION_ERROR));
-	execution(philo_system);
+	if (execution(philo_system))
 		return (ft_error(EXECUTE_ERROR));
 	clear_all(philo_system);
 	printf("PROGRAM END\n");
