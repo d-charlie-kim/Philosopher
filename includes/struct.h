@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:32:12 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/21 17:45:37 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/22 15:46:11 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <pthread.h>
 
-typedef struct s_system t_system;
+# define ERROR -1
+
+typedef struct s_system	t_system;
 
 typedef struct s_info
 {

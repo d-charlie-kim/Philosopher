@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 01:28:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/21 17:56:56 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/22 15:47:59 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <stdio.h>
 # include "struct.h"
 # include "error.h"
-
-# define ERROR -1
+# include "clear.h"
 
 # define SLEEPING 1
 # define EATING 2
@@ -52,6 +51,7 @@ void		thinking(t_philo *philo);
 
 void		printing(t_philo *philo, char *str);
 
+int			join_thread(t_system *system);
 int			execution(t_system *philo_system);
 
-# endif
+#endif

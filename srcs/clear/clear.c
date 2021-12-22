@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_system.c                                      :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 15:44:26 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/22 16:49:07 by dokkim           ###   ########.fr       */
+/*   Created: 2021/12/22 15:43:40 by dokkim            #+#    #+#             */
+/*   Updated: 2021/12/22 15:43:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include "clear.h"
 
-int	init_system(int argc, char **argv, t_system *system)
+void	clear_all(t_system *system)
 {
-	if (!system)
-		return (-1);
-	if (init_info(argc, argv, system))
-		return (-1);
-	if (init_shared(system))
-		return (-1);
-	if (fork_setting(system->philo_info->philos_num, system))
-		return (-1);
-	if (philo_setting(system->philo_info->philos_num, system))
-		return (-1);
-	if (init_monitor(system))
-		return (-1);
-	return (0);
+	long long	i;
+
+	i = 0;
+	pthread_mutex_destroy(&system->shared->print_status);
+	while (i < system->philo_info->philos_num)
+	{
+		pthread_mutex_destroy(&system->forks[i].fork_mutex);
+		i++;
+	}
+	free (system->forks);
+	free (system->philos);
+	free (system->philo_info);
+	free (system->shared);
+	free (system);
 }
