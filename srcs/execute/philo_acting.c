@@ -59,7 +59,6 @@ void	waiting(t_philo *philo, long long time)
 void	eating(t_philo *philo)
 {
 	philo->last_meal_time = get_elapsed_time(philo->philo_system);
-	philo->num_ate++;
 	pthread_mutex_lock(&(philo->philo_system->shared->print_status));
 	if (philo->philo_system->shared->philo_status != ALIVE)
 	{
@@ -71,6 +70,7 @@ void	eating(t_philo *philo)
 	printing(philo, "is eating");
 	pthread_mutex_unlock(&(philo->philo_system->shared->print_status));
 	waiting(philo, philo->philo_system->philo_info->time_to_eat);
+	philo->num_ate++;
 	pthread_mutex_unlock(&(philo->left_fork->fork_mutex));
 	philo->left_fork->fork_status = FREE;
 	pthread_mutex_unlock(&(philo->right_fork->fork_mutex));
